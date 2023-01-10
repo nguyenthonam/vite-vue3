@@ -12,6 +12,8 @@
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/sign-in">Sign in</RouterLink>
+        <RouterLink to="/sign-up">Sign up</RouterLink>
       </nav>
     </div>
   </header>
