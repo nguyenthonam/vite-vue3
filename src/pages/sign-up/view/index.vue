@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import useFirebase from "@/composables/useFirebase";
+// import type
 import type { ISignUp } from "../type";
+import type { ISignUpFirebase } from "@/ultis/types/firebase";
 
 /** init data */
 const initFormData: ISignUp = {
@@ -12,6 +14,7 @@ const initFormData: ISignUp = {
 
 /** composable */
 const router = useRouter();
+const { onSignUpFirebase } = useFirebase();
 
 /** variable */
 const formData = ref<ISignUp>(initFormData);
@@ -19,25 +22,14 @@ const formData = ref<ISignUp>(initFormData);
 /** computed */
 
 /** methods */
-const onSignUp = () => {
-  console.log("onSignUp :>> ");
-  createUserWithEmailAndPassword(
-    getAuth(),
-    formData.value.email,
-    formData.value.password
-  )
-    .then((data) => {
-      console.log("Successfully registered!");
-      console.log("Regster :>> ", data);
-      router.push("/sign-in");
-    })
-    .catch((err) => {
-      console.log("ERR_CODE:", err?.code);
-      alert(err?.message);
-    });
-};
-const onSignUpWithGoogle = () => {
-  console.log("onSignUpWithGoogle :>> ");
+const onSignUp = async () => {
+  const payload: ISignUpFirebase = {
+    email: formData.value.email,
+    password: formData.value.password,
+  };
+  try {
+    await onSignUpFirebase(payload);
+  } catch (err) {}
 };
 </script>
 
@@ -54,7 +46,6 @@ const onSignUpWithGoogle = () => {
         />
       </p>
       <p><button @click="onSignUp">Submit</button></p>
-      <p><button @click="onSignUpWithGoogle">Sign In With Google</button></p>
     </div>
   </div>
 </template>

@@ -13,10 +13,10 @@ const firebaseConfig = {
   storageBucket: "auth-social-2023.appspot.com",
   messagingSenderId: "584161306507",
   appId: "1:584161306507:web:9b10f7c71e2159b985318e",
-  measurementId: "G-C1F9QHTEY0"
+  measurementId: "G-C1F9QHTEY0",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
-export default app
+export default app;
