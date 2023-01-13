@@ -4,8 +4,8 @@ export default function (router:Router) {
   /** Config */
   // router
   router.addRoute({
-    path: "/login",
-    name: "login",
+    path: "/sign-up",
+    name: "sign-up",
     component: () => import("./view/index.vue"),
   });
 }

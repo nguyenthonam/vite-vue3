@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 // import page
-import login from "@/pages/login/index";
 import home from "@/pages/home/index";
 import about from "@/pages/about/index";
+import signin from "@/pages/sign-in/index";
+import signup from "@/pages/sign-up/index";
+import account from "@/pages/account/index";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,7 +13,9 @@ const router = createRouter({
 
 /** add pages */
 home(router);
-login(router);
 about(router);
+signin(router);
+signup(router);
+account(router);
 
 export default router;
