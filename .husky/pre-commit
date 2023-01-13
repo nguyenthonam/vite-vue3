@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# npm test
+yarn pretty-quick --staged && yarn lint-staged || (
+  echo '❌ PRE-COMMIT HOOK: Failed...'
+  false
+)
+
+echo '✅ PRE-COMMIT HOOK: Passed!'
