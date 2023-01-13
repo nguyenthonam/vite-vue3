@@ -1,8 +1,8 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <main>
-    Home page
-  </main>
+  <div>
+    <h1 class="text-3xl font-bold underline">Home Page</h1>
+    <p>Welcome <span class="text-primary">Nam Nguyen!</span></p>
+  </div>
 </template>
