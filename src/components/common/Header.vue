@@ -26,25 +26,31 @@ onBeforeUnmount(() => {
 
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/sign-up">Sign up</RouterLink>
-        <RouterLink v-if="!ui.signedIn" to="/sign-in">Sign in</RouterLink>
-        <span v-else>
-          <button @click="onSignOutFirebase">Sign out</button>
-          <RouterLink to="/account">Account</RouterLink>
-        </span>
-      </nav>
+    <div class="flex justify-between w-full cursor-pointer tablet:hidden">
+      <div class="menu">
+        <img src="/public/images/icon-menu.png" alt="menu" />
+      </div>
+      <div class="flex flex-col">
+        <p class="text-gray-1">Deliver to</p>
+        <p class="text-primary">4102 Pretty View Lane</p>
+      </div>
+      <div>
+        <img src="/public/images/profile.png" alt="logo" />
+      </div>
+    </div>
+    <div class="hidden tablet:flex">
+      <div class="wrapper">
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/sign-up">Sign up</RouterLink>
+          <RouterLink v-if="!ui.signedIn" to="/sign-in">Sign in</RouterLink>
+          <span v-else>
+            <button @click="onSignOutFirebase">Sign out</button>
+            <RouterLink to="/account">Account</RouterLink>
+          </span>
+        </nav>
+      </div>
     </div>
   </header>
 </template>
