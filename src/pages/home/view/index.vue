@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { fetchBanners } from "@/apis/banners/fetchBanners";
+const { isLoading, isError, data, error, isFetching } = fetchBanners();
+console.log("Home Banner :>> ", data);
+</script>
 
 <template>
   <div>
