@@ -2,9 +2,13 @@
 import { ref, onBeforeUnmount } from "vue";
 import useFirebase from "@/composables/useFirebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ENUM_LOCALES } from "@/ultis/constant";
+// import composable
+import useLocales from "@/composables/useLocales";
 
 /** composables */
 const { onSignOutFirebase } = useFirebase();
+const { setLocale } = useLocales();
 
 /** variables */
 const ui = ref({
@@ -18,6 +22,10 @@ const authListener = onAuthStateChanged(getAuth(), function (user) {
     ui.value.signedIn = false; // if we do not
   }
 });
+const changeLocale = (evt: Event) => {
+  let localeElement = evt.target as HTMLSelectElement;
+  setLocale(localeElement?.value);
+};
 
 onBeforeUnmount(() => {
   authListener(); // clear up listener
@@ -34,9 +42,9 @@ onBeforeUnmount(() => {
       height="125"
     />
 
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
+    <div class="wrapper justify-between">
+      <nav class="flex flex-1 justify-center">
+        <RouterLink to="/">{{ $t("home") }}</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/sign-up">Sign up</RouterLink>
         <RouterLink v-if="!ui.signedIn" to="/sign-in">Sign in</RouterLink>
@@ -45,6 +53,14 @@ onBeforeUnmount(() => {
           <RouterLink to="/account">Account</RouterLink>
         </span>
       </nav>
+      <select id="locale" @change="changeLocale">
+        <option :value="ENUM_LOCALES.VI">
+          {{ $t("vietnamese") }}
+        </option>
+        <option :value="ENUM_LOCALES.EN">
+          {{ $t("english") }}
+        </option>
+      </select>
     </div>
   </header>
 </template>
