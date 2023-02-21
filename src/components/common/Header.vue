@@ -5,10 +5,14 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ENUM_LOCALES } from "@/ultis/constant";
 // import composable
 import useLocales from "@/composables/useLocales";
+import { useAuthStore } from "@/stores/auth";
+// import component
+import SignInDialog from "@/components/common/SignInDialog.vue";
 
 /** composables */
 const { onSignOutFirebase } = useFirebase();
 const { setLocale } = useLocales();
+const authStore = useAuthStore();
 
 /** variables */
 const ui = ref({
@@ -53,6 +57,15 @@ onBeforeUnmount(() => {
           <RouterLink to="/account">Account</RouterLink>
         </span>
       </nav>
+      {{ authStore.$state.user }}
+      <button
+        @click="
+          authStore.isSignInDialogVisible = !authStore.isSignInDialogVisible
+        "
+      >
+        Sign in
+      </button>
+      ||
       <select id="locale" @change="changeLocale">
         <option :value="ENUM_LOCALES.VI">
           {{ $t("vietnamese") }}
@@ -61,6 +74,8 @@ onBeforeUnmount(() => {
           {{ $t("english") }}
         </option>
       </select>
+
+      <SignInDialog v-model="authStore.isSignInDialogVisible" />
     </div>
   </header>
 </template>
